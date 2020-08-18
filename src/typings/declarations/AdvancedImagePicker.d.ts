@@ -1,5 +1,6 @@
 /// <reference path="./interfaces/error.d.ts" />
 /// <reference path="./interfaces/options.d.ts" />
+/// <reference path="./interfaces/result.d.ts" />
 
 declare module 'cordova-plugin-advanced-imagepicker' {
 
@@ -21,7 +22,7 @@ declare module 'cordova-plugin-advanced-imagepicker' {
      * @param success Success Callback
      * @param error Error Callback
      */
-    static present(options: PresentOptions, success: (result: string[]) => void, error: (error: AdvancedImagepickerError) => void): void;
+    static present(options: PresentOptions, success: (result: Result[]) => void, error: (error: AdvancedImagepickerError) => void): void;
 
   }
 
