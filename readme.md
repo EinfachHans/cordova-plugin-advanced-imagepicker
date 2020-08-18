@@ -1,4 +1,8 @@
 # Advanced ImagePicker Cordova Plugin
+![Maintenance](https://img.shields.io/maintenance/yes/2020)
+[![npm version](https://badge.fury.io/js/cordova-plugin-advanced-imagepicker.svg)](https://badge.fury.io/js/cordova-plugin-advanced-imagepicker)
+![GitHub followers](https://img.shields.io/github/followers/hanskrywaa?style=social)
+![GitHub stars](https://img.shields.io/github/stars/hanskrywaa/cordova-plugin-advanced-imagepicker?style=social)
 
 This [Cordova](https://cordova.apache.org) Plugin is for a better (multiple) ImagePicker with more options.
 
