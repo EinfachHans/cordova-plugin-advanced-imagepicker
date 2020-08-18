@@ -1,0 +1,38 @@
+{
+  "name": "cordova-plugin-advanced-imagepicker",
+  "version": "1.0.0",
+  "description": "Cordova Plugin for an advanced ImagePicker",
+  "cordova": {
+    "id": "cordova-plugin-advanced-imagepicker",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova",
+    "camera",
+    "advanced",
+    "image",
+    "picker",
+    "imagepicker",
+    "file",
+    "chooser"
+  ],
+  "author": "HansKrywaa",
+  "license": "MIT",
+  "main": "./src/typings/index.js",
+  "types": "./src/typings/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker/issues"
+  },
+  "scripts": {
+    "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 2"
+  },
+  "homepage": "https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker"
+}

@@ -1,0 +1,7 @@
+android {
+    buildFeatures {
+        dataBinding {
+            enabled = true
+        }
+    }
+}
