@@ -33,6 +33,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
 - [Quirks](#quirks)
   - [Android](#android-2)
   - [iOS](#ios-2)
+- [Changelog](#changelog)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -152,3 +153,7 @@ Currently, the Android Library is not able to select Images and Videos at the sa
 
 Currently, if you select or take an image, the result will always be encoded as base64, no matter if you set `asBase64`. 
 `isBase64` is set to **true** in the result then. Videos act normal here. PR's are always welcome.
+
+# Changelog
+
+The full Changelog is available [here](CHANGELOG.md)
