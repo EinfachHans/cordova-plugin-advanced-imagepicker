@@ -123,7 +123,7 @@ Open the ImagePicker
     - maxCountMessage (string) **default: "You need to select a minimum of ... files"**
     - buttonText (string)
     - asDropdown (boolean) **default: false**
-    - asBase84 (boolean) **default: false**
+    - asBase64 (boolean) **default: false**
 
 ```js
 window.AdvancedImagePicker.present({
