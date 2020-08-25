@@ -22,6 +22,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
 **Table of Content**
 
 - [Install](#install)
+  - [Requirements](#requirements)
   - [Android](#android)
   - [iOS](#ios)
 - [Environment Variables](#environment-variables)
@@ -40,6 +41,10 @@ Please consider donating if you're using this plugin in an app that makes you mo
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Install
+
+## Requirements
+
+- **cordova-android** `>= 9.0.0`
 
 ## Android
 Because the used Framework uses AndroidX and is developed in Kotlin, make sure to enable `AndroidXEnabled` and `GradlePluginKotlinEnabled`: 
