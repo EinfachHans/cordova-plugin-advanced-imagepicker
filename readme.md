@@ -44,6 +44,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
 
 ## Requirements
 
+- **cordova** `>= 9.0.0`
 - **cordova-android** `>= 9.0.0`
 
 ## Android
@@ -56,6 +57,8 @@ Because the used Framework uses AndroidX and is developed in Kotlin, make sure t
 ## iOS
 
 This Plugin is developed in Swift and automaticaly adds the Plugin to [Support Swift](https://github.com/akofman/cordova-plugin-add-swift-support).
+
+I developed it, testing with **cordova-ios@6.1.0**.
 
 # Environment Variables
 
