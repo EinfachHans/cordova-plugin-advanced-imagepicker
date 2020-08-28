@@ -1,4 +1,4 @@
-package de.hanskrywaa.AdvancedImagePicker;
+package de.einfachhans.AdvancedImagePicker;
 
 public enum AdvancedImagePickerErrorCodes {
     UnsupportedAction(1),

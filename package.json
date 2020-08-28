@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker.git"
+    "url": "git+https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker.git"
   },
   "keywords": [
     "ecosystem:cordova",
@@ -27,15 +27,15 @@
     "file",
     "chooser"
   ],
-  "author": "HansKrywaa",
+  "author": "EinfachHans",
   "license": "MIT",
   "main": "./src/typings/index.js",
   "types": "./src/typings/index.d.ts",
   "bugs": {
-    "url": "https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker/issues"
+    "url": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues"
   },
   "scripts": {
     "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 2"
   },
-  "homepage": "https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker"
+  "homepage": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker"
 }

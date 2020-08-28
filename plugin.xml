@@ -3,8 +3,8 @@
     <name>AdvancedImagePicker</name>
     <description>Cordova Plugin for an advanced (multiple) ImagePicker</description>
 
-    <repo>https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker</repo>
-    <issue>https://github.com/HansKrywaa/cordova-plugin-advanced-imagepicker/issues</issue>
+    <repo>https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker</repo>
+    <issue>https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues</issue>
 
     <license>MIT</license>
 
@@ -15,12 +15,12 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="AdvancedImagePicker">
-                <param name="android-package" value="de.hanskrywaa.AdvancedImagePicker.AdvancedImagePicker"/>
+                <param name="android-package" value="de.einfachhans.AdvancedImagePicker.AdvancedImagePicker"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/AdvancedImagePicker.java" target-dir="src/de/hanskrywaa/AdvancedImagePicker"/>
-        <source-file src="src/android/AdvancedImagePickerErrorCodes.java" target-dir="src/de/hanskrywaa/AdvancedImagePicker"/>
+        <source-file src="src/android/AdvancedImagePicker.java" target-dir="src/de/einfachhans/AdvancedImagePicker"/>
+        <source-file src="src/android/AdvancedImagePickerErrorCodes.java" target-dir="src/de/einfachhans/AdvancedImagePicker"/>
         <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
 
         <preference name="ANDROID_IMAGE_PICKER_VERSION" default="1.1.3" />

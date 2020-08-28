@@ -1,4 +1,4 @@
-package de.hanskrywaa.AdvancedImagePicker;
+package de.einfachhans.AdvancedImagePicker;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
