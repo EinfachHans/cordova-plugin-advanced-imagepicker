@@ -65,7 +65,7 @@ declare module 'cordova-plugin-advanced-imagepicker' {
      * Return the Result as base64
      * default: false
      */
-    asBase84?: boolean;
+    asBase64?: boolean;
   }
 
 }
