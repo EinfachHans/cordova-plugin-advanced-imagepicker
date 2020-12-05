@@ -34,6 +34,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
                 this.presentFullScreen(args);
                 return true;
             } else {
+                returnError(AdvancedImagePickerErrorCodes.UnsupportedAction);
                 return false;
             }
         } catch (JSONException exception) {
