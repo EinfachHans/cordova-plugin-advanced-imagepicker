@@ -53,7 +53,9 @@ import YPImagePicker
 
         var screens: [YPPickerScreen] = [.library];
         if(showCameraTile) {
-            screens.append(.photo);
+            if(mediaType != "VIDEO") {
+                screens.append(.photo);
+            }
             if(mediaType != "IMAGE") {
                 screens.append(.video);
             }
