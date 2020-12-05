@@ -128,6 +128,7 @@ Open the ImagePicker
 - options (object) - a JSON-Object containing the following Elements (all optional):
     - mediaType (string) **default: "IMAGE"**
     - showCameraTile (boolean) **default: true**
+    - startOnScreen (string) **default: "LIBRARY"**
     - scrollIndicatorDateFormat (string) **Android only, default: "YYYY.MM"**
     - showTitle (boolean) **Android only, default: true**
     - title (string) **Android only, default: "Select Image"**

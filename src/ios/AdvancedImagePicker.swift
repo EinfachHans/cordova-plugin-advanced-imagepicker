@@ -21,6 +21,7 @@ import YPImagePicker
         }
 
         let mediaType = options?.value(forKey: "mediaType") as? String ?? "IMAGE";
+        let startOnScreen = options?.value(forKey: "startOnScreen") as? String ?? "LIBRARY";
         let showCameraTile = options?.value(forKey: "showCameraTile") as? Bool ?? true;
         let min = options?.value(forKey: "min") as? NSInteger ?? 1;
         let max = options?.value(forKey: "max") as? NSInteger ?? 1;
@@ -44,12 +45,19 @@ import YPImagePicker
         config.showsPhotoFilters = false;
         config.showsVideoTrimmer = false;
         config.shouldSaveNewPicturesToAlbum = false;
-        config.startOnScreen = .library;
         config.albumName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String;
         config.library.isSquareByDefault = false;
         config.library.itemOverlayType = .none;
         config.library.skipSelectionsGallery = true;
         config.library.preSelectItemOnMultipleSelection = false;
+
+        if(startOnScreen == "IMAGE") {
+            config.startOnScreen = .photo;
+        } else if(startOnScreen == "VIDEO") {
+            config.startOnScreen = .video;
+        } else {
+            config.startOnScreen = .library;
+        }
 
         var screens: [YPPickerScreen] = [.library];
         if(showCameraTile) {

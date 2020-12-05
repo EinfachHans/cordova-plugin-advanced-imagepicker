@@ -6,12 +6,16 @@ declare module 'cordova-plugin-advanced-imagepicker' {
      * default: "IMAGE"
      */
     mediaType?: 'IMAGE' | 'VIDEO' | 'ALL';
-
     /**
      * Show possibility to take via Camera
      * default: true
      */
     showCameraTile?: boolean;
+    /**
+     * On which Screen the Picker should be started (iOS only)
+     * default: "LIBRARY"
+     */
+    startOnScreen?: 'LIBRARY' | 'IMAGE' | 'VIDEO';
     /**
      * Date format of the Scroll Indicator (Android only)
      * default: "YYYY.MM"
