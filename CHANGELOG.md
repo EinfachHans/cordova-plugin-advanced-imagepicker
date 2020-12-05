@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 1.2.0
 - return Unsupported Error on android
 - fix: append correct screens by mediaType on iOS [#7](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/7)
 - `startOnScreen` config added for iOS
