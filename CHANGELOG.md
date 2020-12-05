@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 1.1.0
 - Update Android default Version to 1.1.4 --> Enabled SDK 30 support
 - Update iOS Pod to 4.4.0 --> [Changelog](https://github.com/Yummypets/YPImagePicker/releases)
 - **BREAKING**: iOS know works with a file url and only returns isBase64 if `asBase64: true` was set
