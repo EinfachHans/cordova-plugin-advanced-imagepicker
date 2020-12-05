@@ -11,3 +11,7 @@ exports.ErrorCodes = {
 exports.present = function (options, success, error) {
   exec(success, error, pluginName, 'present', [options]);
 };
+
+exports.cleanup = function (success, error) {
+  exec(success, error, pluginName, 'cleanup', [])
+}

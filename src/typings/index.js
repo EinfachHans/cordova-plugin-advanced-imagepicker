@@ -12,6 +12,11 @@ var AdvancedImagePicker = /** @class */ (function () {
     return plu.present.apply(plu, arguments);
   };
 
+  AdvancedImagePicker.cleanup = function (success, failure) {
+    var plu = plugin();
+    return plu.cleanup.apply(plu, arguments);
+  };
+
   return AdvancedImagePicker;
 }());
 export default AdvancedImagePicker;

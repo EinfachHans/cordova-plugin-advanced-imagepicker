@@ -35,7 +35,7 @@
     "url": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues"
   },
   "scripts": {
-    "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 2"
+    "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 3"
   },
   "homepage": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker"
 }

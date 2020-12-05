@@ -4,8 +4,8 @@
 
 This [Cordova](https://cordova.apache.org) Plugin is for a better (multiple) ImagePicker with more options.
 
-It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `4.3.1`) on iOS and 
-[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `3.13.0`) on Android. 
+It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `4.4.0`) on iOS and 
+[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.1.4`) on Android. 
 
 **This Plugin is in active development!**
 
@@ -32,10 +32,12 @@ Please consider donating if you're using this plugin in an app that makes you mo
   - [Failure Callbacks](#failure-callbacks)
   - [Error Codes](#error-codes)
 - [Api](#api)
-  - [present](#present)
+  - [All platforms](#all-platforms)
+    - [present](#present)
+  - [iOS](#ios-2)
+    - [cleanup](#cleanup)
 - [Quirks](#quirks)
   - [Android](#android-2)
-  - [iOS](#ios-2)
 - [Changelog](#changelog)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -64,7 +66,7 @@ I developed it, testing with **cordova-ios@6.1.0**.
 
 ## Android
 
-- ANDROID_IMAGE_PICKER_VERSION - Version of `gun0912.ted:tedimagepicker` / default to `1.1.3` 
+- ANDROID_IMAGE_PICKER_VERSION - Version of `gun0912.ted:tedimagepicker` / default to `1.1.4` 
 
 ## iOS
 
@@ -115,11 +117,13 @@ They can be accessed over for Example `window.AdvancedImagePicker.ErrorCodes.Uns
 
 The list of available methods for this plugin is described below.
 
-## present
+## All platforms
+
+### present
 
 Open the ImagePicker
 
-### Parameters:
+#### Parameters:
 
 - options (object) - a JSON-Object containing the following Elements (all optional):
     - mediaType (string) **default: "IMAGE"**
@@ -145,7 +149,7 @@ window.AdvancedImagePicker.present({
   console.error(error);
 });
 ```
-### SuccessType:
+#### SuccessType:
 
 This Methode returns an Array of Objects with the following fields:
 
@@ -153,16 +157,25 @@ This Methode returns an Array of Objects with the following fields:
 - type (`'image'` | `'video'`) - type of selected file
 - src (string) - Result as file-uri or base64 encoded string
 
+## iOS
+
+### cleanup
+
+Cleans the files that were stored in the tmp file directory
+
+```js
+window.AdvancedImagePicker.cleanup(function() {
+  console.log('success');
+}, function (error) {
+  console.error(error);
+});
+```
+
 # Quirks
 
 ## Android
 
 Currently, the Android Library is not able to select Images and Videos at the same Time. See reported Issue [here](https://github.com/ParkSangGwon/TedImagePicker/issues/40).
-
-## iOS
-
-Currently, if you select or take an image, the result will always be encoded as base64, no matter if you set `asBase64`. 
-`isBase64` is set to **true** in the result then. Videos act normal here. PR's are always welcome.
 
 # Changelog
 

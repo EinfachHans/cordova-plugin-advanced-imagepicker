@@ -3,10 +3,12 @@ import YPImagePicker
 @objc(AdvancedImagePicker) class AdvancedImagePicker : CDVPlugin  {
 
     var _callbackId: String?
+    var OWN_PREFIX: String?
 
     @objc(pluginInitialize)
     override func pluginInitialize() {
         super.pluginInitialize()
+        self.OWN_PREFIX = "advanced_image_picker_";
     }
 
     @objc(present:)
@@ -90,10 +92,10 @@ import YPImagePicker
         for item in items {
             switch item {
             case .photo(let photo):
-                let encodedImage = self.encodeImage(image: photo.image);
+                let encodedImage = self.encodeImage(image: photo.image, asBase64: asBase64);
                 array.append([
                     "type": "image",
-                    "isBase64": true,
+                    "isBase64": asBase64,
                     "src": encodedImage
                 ]);
                 break;
@@ -120,9 +122,27 @@ import YPImagePicker
         self.commandDelegate.send(result, callbackId: _callbackId)
     }
 
-    func encodeImage(image: UIImage) -> String {
+    func encodeImage(image: UIImage, asBase64: Bool) -> String {
         let imageData = UIImagePNGRepresentation(image)! as NSData;
-        return imageData.base64EncodedString(options: .lineLength64Characters);
+        if(asBase64) {
+            return imageData.base64EncodedString(options: .lineLength64Characters);
+        } else {
+            let filePath = self.tempFilePath();
+            do {
+                try imageData.write(to: filePath, options: .atomic);
+                return filePath.absoluteString;
+            } catch {
+                return error.localizedDescription;
+            }
+        }
+    }
+
+    func tempFilePath(ext: String = "png") -> URL {
+        let filename: String = self.OWN_PREFIX! + UUID().uuidString;
+        var contentUrl = URL(fileURLWithPath: NSTemporaryDirectory());
+        contentUrl.appendPathComponent(filename);
+        contentUrl.appendPathExtension(ext);
+        return contentUrl;
     }
 
     func encodeVideo(url: URL) -> String {
@@ -134,16 +154,38 @@ import YPImagePicker
         }
     }
 
-    func returnError(error: ErrorCodes, message: String = "") {
-        if(_callbackId != nil) {
+    func returnError(callbackId: String?, error: ErrorCodes, message: String = "") {
+        if(callbackId != nil) {
             let result:CDVPluginResult = CDVPluginResult(
                 status: CDVCommandStatus_ERROR, messageAs: [
                     "error": error.rawValue,
                     "message": message
             ]);
-            self.commandDelegate.send(result, callbackId: _callbackId)
-            _callbackId = nil;
+            self.commandDelegate.send(result, callbackId: callbackId)
         }
+    }
+
+    func returnError(error: ErrorCodes, message: String = "") {
+        self.returnError(callbackId: _callbackId, error: error, message: message)
+        _callbackId = nil;
+    }
+
+    @objc(cleanup:)
+    func cleanup(command: CDVInvokedUrlCommand) {
+        do {
+            let tmpFiles: [String] = try FileManager().contentsOfDirectory(atPath: NSTemporaryDirectory());
+            for tmpFile in tmpFiles {
+                // only delete files from this plugin:
+                if(tmpFile.hasPrefix(self.OWN_PREFIX!)) {
+                    try FileManager().removeItem(atPath: NSTemporaryDirectory() + tmpFile)
+                }
+            }
+        } catch {
+            returnError(callbackId: command.callbackId, error: ErrorCodes.UnknownError, message: error.localizedDescription);
+            return;
+        }
+        let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK);
+        self.commandDelegate.send(result, callbackId: command.callbackId);
     }
 }
 
