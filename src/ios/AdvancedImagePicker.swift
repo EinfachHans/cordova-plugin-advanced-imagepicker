@@ -29,6 +29,7 @@ import YPImagePicker
         let maxCountMessage = options?.value(forKey: "maxCountMessage") as? String ?? defaultMaxCountMessage;
         let buttonText = options?.value(forKey: "buttonText") as? String ?? "";
         let asBase64 = options?.value(forKey: "asBase64") as? Bool ?? false;
+        let videoCompression = options?.value(forKey: "videoCompression") as? String ?? "AVAssetExportPresetHighestQuality";
 
         if(max < 0 || min < 0) {
             self.returnError(error: ErrorCodes.WrongJsonObject, message: "Min and Max can not be less then zero.");
@@ -50,6 +51,7 @@ import YPImagePicker
         config.library.itemOverlayType = .none;
         config.library.skipSelectionsGallery = true;
         config.library.preSelectItemOnMultipleSelection = false;
+        config.video.compression = videoCompression;
 
         if(startOnScreen == "IMAGE") {
             config.startOnScreen = .photo;
@@ -83,7 +85,6 @@ import YPImagePicker
         if(buttonText != "") {
             config.wordings.next = buttonText;
         }
-
 
         let picker = YPImagePicker(configuration: config);
 

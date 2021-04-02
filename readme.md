@@ -140,6 +140,7 @@ Open the ImagePicker
     - buttonText (string)
     - asDropdown (boolean) **default: false**
     - asBase64 (boolean) **default: false**
+    - videoCompression (string) ([Available Options](https://github.com/Yummypets/YPImagePicker/blob/23158e138bd649b40762bf2e4aa4beb0d463a121/Source/Configuration/YPImagePickerConfiguration.swift#L226-L240)) **default: AVAssetExportPresetHighestQuality**
 
 ```js
 window.AdvancedImagePicker.present({
