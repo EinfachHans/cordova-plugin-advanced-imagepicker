@@ -30,6 +30,7 @@ import YPImagePicker
         let buttonText = options?.value(forKey: "buttonText") as? String ?? "";
         let asBase64 = options?.value(forKey: "asBase64") as? Bool ?? false;
         let videoCompression = options?.value(forKey: "videoCompression") as? String ?? "AVAssetExportPresetHighestQuality";
+        let asJpeg = options?.value(forKey: "asJpeg") as? Bool ?? false;
 
         if(max < 0 || min < 0) {
             self.returnError(error: ErrorCodes.WrongJsonObject, message: "Min and Max can not be less then zero.");
@@ -90,7 +91,7 @@ import YPImagePicker
 
         picker.didFinishPicking {items, cancelled in
             if(items.count > 0) {
-                self.handleResult(items: items, asBase64: asBase64);
+                self.handleResult(items: items, asBase64: asBase64, asJpeg: asJpeg);
             }
             picker.dismiss(animated: true, completion: nil);
         }
@@ -98,12 +99,12 @@ import YPImagePicker
         self.viewController.present(picker, animated: true, completion: nil);
     }
 
-    func handleResult(items: [YPMediaItem], asBase64: Bool) {
+    func handleResult(items: [YPMediaItem], asBase64: Bool, asJpeg: Bool) {
         var array = [] as Array;
         for item in items {
             switch item {
             case .photo(let photo):
-                let encodedImage = self.encodeImage(image: photo.image, asBase64: asBase64);
+                let encodedImage = self.encodeImage(image: photo.image, asBase64: asBase64, asJpeg: asJpeg);
                 array.append([
                     "type": "image",
                     "isBase64": asBase64,
@@ -133,8 +134,13 @@ import YPImagePicker
         self.commandDelegate.send(result, callbackId: _callbackId)
     }
 
-    func encodeImage(image: UIImage, asBase64: Bool) -> String {
-        let imageData = image.pngData()! as NSData;
+    func encodeImage(image: UIImage, asBase64: Bool, asJpeg: Bool) -> String {
+        let imageData: NSData;
+        if(asJpeg) {
+            imageData = image.jpegData(compressionQuality: 0.8)! as NSData;
+        } else {
+            imageData = image.pngData()! as NSData;
+        }
         if(asBase64) {
             return imageData.base64EncodedString(options: .lineLength64Characters);
         } else {
