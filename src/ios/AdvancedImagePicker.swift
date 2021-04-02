@@ -133,7 +133,7 @@ import YPImagePicker
     }
 
     func encodeImage(image: UIImage, asBase64: Bool) -> String {
-        let imageData = UIImagePNGRepresentation(image)! as NSData;
+        let imageData = image.pngData()! as NSData;
         if(asBase64) {
             return imageData.base64EncodedString(options: .lineLength64Characters);
         } else {
