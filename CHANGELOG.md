@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1
+- fix error with new android default version
+
 ## 1.3.0
 - use image.pngData() instead of UIImagePNGRepresentation
 - iOS: Video Compression added
