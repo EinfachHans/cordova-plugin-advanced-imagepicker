@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+- use image.pngData() instead of UIImagePNGRepresentation
+- iOS: Video Compression added
+- `asJpeg added`
+- correctly compress Videos on Android
+
 ## 1.2.0
 - return Unsupported Error on android
 - fix: append correct screens by mediaType on iOS [#7](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/7)
