@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +64,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
         String buttonText = options.optString("buttonText");
         boolean asDropdown = options.optBoolean("asDropdown");
         boolean asBase64 = options.optBoolean("asBase64");
+        boolean asJpeg = options.optBoolean("asJpeg");
 
         if (min < 0 || max < 0) {
             this.returnError(AdvancedImagePickerErrorCodes.WrongJsonObject, "Min and Max can not be less then zero.");
@@ -103,7 +105,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
         if (max == 1) {
             String finalType = type;
             builder.start(result -> {
-                this.handleResult(result, asBase64, finalType);
+                this.handleResult(result, asBase64, finalType, asJpeg);
             });
         } else {
             if (min > 0) {
@@ -115,18 +117,18 @@ public class AdvancedImagePicker extends CordovaPlugin {
 
             String finalType1 = type;
             builder.startMultiImage(result -> {
-                this.handleResult(result, asBase64, finalType1);
+                this.handleResult(result, asBase64, finalType1, asJpeg);
             });
         }
     }
 
-    private void handleResult(Uri uri, boolean asBase64, String type) {
+    private void handleResult(Uri uri, boolean asBase64, String type, boolean asJpeg) {
         List<Uri> list = new ArrayList<>();
         list.add(uri);
-        this.handleResult(list, asBase64, type);
+        this.handleResult(list, asBase64, type, asJpeg);
     }
 
-    private void handleResult(List<? extends Uri> uris, boolean asBase64, String type) {
+    private void handleResult(List<? extends Uri> uris, boolean asBase64, String type, boolean asJpeg) {
         JSONArray result = new JSONArray();
         for (Uri uri : uris) {
             Map<String, Object> resultMap = new HashMap<>();
@@ -134,8 +136,8 @@ public class AdvancedImagePicker extends CordovaPlugin {
             resultMap.put("isBase64", asBase64);
             if (asBase64) {
                 try {
-                    resultMap.put("src", this.encodeImage(uri));
-                } catch (FileNotFoundException e) {
+                    resultMap.put("src", type.equals("video") ? this.encodeVideo(uri) : this.encodeImage(uri, asJpeg));
+                } catch (Exception e) {
                     e.printStackTrace();
                     this.returnError(AdvancedImagePickerErrorCodes.UnknownError, e.getMessage());
                     return;
@@ -148,15 +150,32 @@ public class AdvancedImagePicker extends CordovaPlugin {
         this._callbackContext.success(result);
     }
 
-    private String encodeImage(Uri uri) throws FileNotFoundException {
-        final InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
-        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-        return encodeImage(selectedImage);
+    private String encodeVideo(Uri uri) throws IOException {
+        final InputStream videoStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
+        byte[] bytes;
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        while ((bytesRead = videoStream.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead);
+        }
+        bytes = output.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-    private String encodeImage(Bitmap bm) {
+    private String encodeImage(Uri uri, boolean asJpeg) throws FileNotFoundException {
+        final InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
+        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+        return encodeImage(selectedImage, asJpeg);
+    }
+
+    private String encodeImage(Bitmap bm, boolean asJpeg) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        if (asJpeg) {
+            bm.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        } else {
+            bm.compress(Bitmap.CompressFormat.PNG, 80, baos);
+        }
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
