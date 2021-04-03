@@ -81,7 +81,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
                 .showTitle(showTitle)
                 .zoomIndicator(zoomIndicator)
                 .errorListener(error -> {
-                    this.returnError(AdvancedImagePickerErrorCodes.UnknownError, error);
+                    this.returnError(AdvancedImagePickerErrorCodes.UnknownError, error.getMessage());
                 });
 
         if (!scrollIndicatorDateFormat.equals("")) {
