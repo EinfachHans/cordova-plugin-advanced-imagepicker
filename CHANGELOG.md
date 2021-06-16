@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.2
+- Change obsolete `android.dataBinding.enabled` to `android.buildFeatures.dataBinding`
+
 ## 1.3.1
 - fix error with new android default version
 
