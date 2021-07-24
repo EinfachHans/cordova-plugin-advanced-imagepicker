@@ -5,6 +5,7 @@ pluginName = 'AdvancedImagePicker';
 exports.ErrorCodes = {
   UnsupportedAction: 1,
   WrongJsonObject: 2,
+  PickerCanceled: 3,
   UnknownError: 10
 };
 

@@ -12,6 +12,7 @@ declare module 'cordova-plugin-advanced-imagepicker' {
     static ErrorCodes: {
       UnsupportedAction,
       WrongJsonObject,
+      PickerCanceled,
       UnknownError
     };
 

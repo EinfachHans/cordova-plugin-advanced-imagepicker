@@ -90,7 +90,9 @@ import YPImagePicker
         let picker = YPImagePicker(configuration: config);
 
         picker.didFinishPicking {items, cancelled in
-            if(items.count > 0) {
+            if(cancelled) {
+                self.returnError(error: ErrorCodes.PickerCanceled)
+            } else if(items.count > 0) {
                 self.handleResult(items: items, asBase64: asBase64, asJpeg: asJpeg);
             }
             picker.dismiss(animated: true, completion: nil);
@@ -209,5 +211,6 @@ import YPImagePicker
 enum ErrorCodes:NSNumber {
     case UnsupportedAction = 1
     case WrongJsonObject = 2
+    case PickerCanceled = 3
     case UnknownError = 10
 }
