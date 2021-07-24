@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.0
+- Upgrade iOS dependency ([See changes](https://github.com/Yummypets/YPImagePicker/releases/tag/4.5.0))
+
 ## 1.3.2
 - Change obsolete `android.dataBinding.enabled` to `android.buildFeatures.dataBinding`
 
