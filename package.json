@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-advanced-imagepicker",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Cordova Plugin for an advanced (multiple) ImagePicker",
   "cordova": {
     "id": "cordova-plugin-advanced-imagepicker",

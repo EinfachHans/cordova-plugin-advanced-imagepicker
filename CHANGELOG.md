@@ -3,6 +3,7 @@
 ## 1.4.0
 - Upgrade iOS dependency ([See changes](https://github.com/Yummypets/YPImagePicker/releases/tag/4.5.0))
 - Upgrade default android dependency ([See Changes](https://github.com/ParkSangGwon/TedImagePicker/releases/tag/1.2.2))
+- iOS: `PickerCanceled` ErrorCode added
 
 ### Breaking
 The Change of the android dependency also includes a dependency-name change. This **could** cause old versions to not work anymore. So make sure to update `ANDROID_IMAGE_PICKER_VERSION` in the `package.json` to `1.2.2`
