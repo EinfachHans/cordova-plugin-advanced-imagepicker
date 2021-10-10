@@ -2,6 +2,17 @@
   "name": "cordova-plugin-advanced-imagepicker",
   "version": "1.4.0",
   "description": "Cordova Plugin for an advanced (multiple) ImagePicker",
+  "devDependencies": {
+    "@commitlint/config-conventional": "13.2.0",
+    "@saithodev/semantic-release-backmerge": "1.5.3",
+    "@semantic-release/changelog": "6.0.0",
+    "@semantic-release/exec": "6.0.1",
+    "@semantic-release/git": "10.0.0",
+    "@semantic-release/npm": "8.0.0"
+  },
+  "scripts": {
+    "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 3"
+  },
   "cordova": {
     "id": "cordova-plugin-advanced-imagepicker",
     "platforms": [
@@ -33,9 +44,6 @@
   "types": "./src/typings/index.d.ts",
   "bugs": {
     "url": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues"
-  },
-  "scripts": {
-    "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 3"
   },
   "homepage": "https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker"
 }

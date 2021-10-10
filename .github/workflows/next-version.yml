@@ -1,0 +1,38 @@
+name: 'Next Version'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GIT_AUTHOR_NAME: EinfachHans
+  GIT_AUTHOR_EMAIL: hanskrywaa@web.de
+  GIT_COMMITTER_NAME: EinfachHans
+  GIT_COMMITTER_EMAIL: hanskrywaa@web.de
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  next-version:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/') != true
+
+    strategy:
+      matrix:
+        node-version: [ 14.17.0 ]
+
+    steps:
+      - name: 'Check out Git repository'
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 'Install Node.js dependencies'
+        run: npm ci
+
+      - name: 'Starting semantic release'
+        run: npx semantic-release
