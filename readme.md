@@ -143,6 +143,9 @@ Open the ImagePicker
     - asBase64 (boolean) **default: false**
     - asJpeg (boolean) **default: false**
     - videoCompression (string) ([Available Options](https://github.com/Yummypets/YPImagePicker/blob/23158e138bd649b40762bf2e4aa4beb0d463a121/Source/Configuration/YPImagePickerConfiguration.swift#L226-L240)) **default: AVAssetExportPresetHighestQuality**
+    - recordingTimeLimit (number) **default: 60.0** **IOS only**
+    - libraryTimeLimit (number) **default: 60.0** **IOS only**
+    - minimumTimeLimit (number) **default: 3.0** **IOS only**
 
 ```js
 window.AdvancedImagePicker.present({
