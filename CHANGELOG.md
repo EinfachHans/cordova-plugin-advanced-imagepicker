@@ -1,3 +1,15 @@
+## [1.5.0](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.4.0...V1.5.0) (2021-10-10)
+
+
+### Features
+
+* **ios:** add more video config options ([#24](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/24)) ([2833f38](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/2833f38b35c63afe6eabe5b80ae53c849e4b072d))
+
+
+### Code Refactoring
+
+* add semantic release ([cdf0006](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/cdf0006aea589d9444716b6184f60b8816689ac3))
+
 ## 1.4.0
 - Upgrade iOS dependency ([See changes](https://github.com/Yummypets/YPImagePicker/releases/tag/4.5.0))
 - Upgrade default android dependency ([See Changes](https://github.com/ParkSangGwon/TedImagePicker/releases/tag/1.2.2))
