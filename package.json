@@ -8,7 +8,8 @@
     "@semantic-release/changelog": "6.0.0",
     "@semantic-release/exec": "6.0.1",
     "@semantic-release/git": "10.0.0",
-    "@semantic-release/npm": "8.0.0"
+    "@semantic-release/npm": "8.0.0",
+    "doctoc": "2.0.1"
   },
   "scripts": {
     "doctoc": "doctoc readme.md --github --title '**Table of Content**' --maxlevel 3"
