@@ -1,3 +1,10 @@
+### [1.5.1](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.0...V1.5.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* **ios:** use double instead of NSFloat ([#26](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/26)) ([91a0c2a](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/91a0c2af8f7bf38ebec6148720633186e921482d))
+
 ## [1.5.0](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.4.0...V1.5.0) (2021-10-10)
 
 
