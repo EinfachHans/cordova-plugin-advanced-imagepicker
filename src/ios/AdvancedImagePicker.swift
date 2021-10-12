@@ -31,9 +31,9 @@ import YPImagePicker
         let asBase64 = options?.value(forKey: "asBase64") as? Bool ?? false;
         let videoCompression = options?.value(forKey: "videoCompression") as? String ?? "AVAssetExportPresetHighestQuality";
         let asJpeg = options?.value(forKey: "asJpeg") as? Bool ?? false;
-        let recordingTimeLimit = options?.value(forKey: "recordingTimeLimit") as? NSFloat ?? 60.0;
-        let libraryTimeLimit = options?.value(forKey: "libraryTimeLimit") as? NSFloat ?? 60.0;
-        let minimumTimeLimit = options?.value(forKey: "minimumTimeLimit") as? NSFloat ?? 3.0;
+        let recordingTimeLimit = options?.value(forKey: "recordingTimeLimit") as? Double ?? 60.0;
+        let libraryTimeLimit = options?.value(forKey: "libraryTimeLimit") as? Double ?? 60.0;
+        let minimumTimeLimit = options?.value(forKey: "minimumTimeLimit") as? Double ?? 3.0;
 
         if(max < 0 || min < 0) {
             self.returnError(error: ErrorCodes.WrongJsonObject, message: "Min and Max can not be less then zero.");
