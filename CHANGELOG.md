@@ -1,3 +1,10 @@
+### [1.5.4](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.3...V1.5.4) (2021-10-18)
+
+
+### Bug Fixes
+
+* **ios:** use correct key for error code ([57180f3](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/57180f356ee2034feedad22a6f0eca21eadd34b1))
+
 ### [1.5.3](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.2...V1.5.3) (2021-10-18)
 
 
