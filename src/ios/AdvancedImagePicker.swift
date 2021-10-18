@@ -95,6 +95,12 @@ import YPImagePicker
 
         let picker = YPImagePicker(configuration: config);
 
+        if #available(iOS 15.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            picker.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+
         picker.didFinishPicking {items, cancelled in
             if(cancelled) {
                 self.returnError(error: ErrorCodes.PickerCanceled)
@@ -150,7 +156,7 @@ import YPImagePicker
             imageData = image.pngData()! as NSData;
         }
         if(asBase64) {
-            return imageData.base64EncodedString(options: .lineLength64Characters);
+            return imageData.base64EncodedString();
         } else {
             let filePath = self.tempFilePath();
             do {
@@ -173,7 +179,7 @@ import YPImagePicker
     func encodeVideo(url: URL) -> String {
         do {
             let fileData = try Data.init(contentsOf: url)
-            return fileData.base64EncodedString(options: .lineLength64Characters);
+            return fileData.base64EncodedString();
         } catch {
             return "";
         }
