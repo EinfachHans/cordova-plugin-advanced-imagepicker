@@ -189,7 +189,7 @@ import YPImagePicker
         if(callbackId != nil) {
             let result:CDVPluginResult = CDVPluginResult(
                 status: CDVCommandStatus_ERROR, messageAs: [
-                    "error": error.rawValue,
+                    "code": error.rawValue,
                     "message": message
             ]);
             self.commandDelegate.send(result, callbackId: callbackId)
