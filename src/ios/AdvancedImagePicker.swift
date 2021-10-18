@@ -173,7 +173,7 @@ import YPImagePicker
     func encodeVideo(url: URL) -> String {
         do {
             let fileData = try Data.init(contentsOf: url)
-            return fileData.base64EncodedString(options: .lineLength64Characters);
+            return fileData.base64EncodedString();
         } catch {
             return "";
         }
