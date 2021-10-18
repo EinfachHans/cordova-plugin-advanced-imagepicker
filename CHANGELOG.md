@@ -1,3 +1,12 @@
+### [1.5.2](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.1...V1.5.2) (2021-10-18)
+
+
+### Bug Fixes
+
+* **ios:** fix ioa15 styling [See](https://github.com/Yummypets/YPImagePicker/issues/690) ([1c02839](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/1c02839d2e6d9b46a61a532d056f67a5bf2f9561))
+* **ios:** remove line breaks from generated base64 ([dfb472b](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/dfb472b327696302b8e730b1832b93b78966bcf6))
+* **ios:** remove line breaks from generated video base64 ([1f60c2d](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/1f60c2ddec3051125c69aa9b3ec3b1fe8b00f081))
+
 ### [1.5.1](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.0...V1.5.1) (2021-10-12)
 
 
