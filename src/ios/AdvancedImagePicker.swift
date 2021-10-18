@@ -150,7 +150,7 @@ import YPImagePicker
             imageData = image.pngData()! as NSData;
         }
         if(asBase64) {
-            return imageData.base64EncodedString(options: .lineLength64Characters);
+            return imageData.base64EncodedString();
         } else {
             let filePath = self.tempFilePath();
             do {
