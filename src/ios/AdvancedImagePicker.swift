@@ -95,6 +95,12 @@ import YPImagePicker
 
         let picker = YPImagePicker(configuration: config);
 
+        if #available(iOS 15.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            picker.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+
         picker.didFinishPicking {items, cancelled in
             if(cancelled) {
                 self.returnError(error: ErrorCodes.PickerCanceled)
