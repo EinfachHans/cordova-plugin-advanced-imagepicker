@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-advanced-imagepicker" version="1.4.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-advanced-imagepicker" version="1.5.5" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>AdvancedImagePicker</name>
     <description>Cordova Plugin for an advanced (multiple) ImagePicker</description>
 
-    <repo>https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker</repo>
-    <issue>https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues</issue>
+    <repo>https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker</repo>
+    <issue>https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker/issues</issue>
 
     <license>MIT</license>
 
@@ -23,7 +23,7 @@
         <source-file src="src/android/AdvancedImagePickerErrorCodes.java" target-dir="src/de/einfachhans/AdvancedImagePicker"/>
         <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
 
-        <preference name="ANDROID_IMAGE_PICKER_VERSION" default="1.2.2" />
+        <preference name="ANDROID_IMAGE_PICKER_VERSION" default="1.2.7" />
         <framework src="io.github.ParkSangGwon:tedimagepicker:$ANDROID_IMAGE_PICKER_VERSION"/>
     </platform>
 
