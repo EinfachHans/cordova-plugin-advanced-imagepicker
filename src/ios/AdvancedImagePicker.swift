@@ -30,7 +30,10 @@ import YPImagePicker
         let buttonText = options?.value(forKey: "buttonText") as? String ?? "";
         let asBase64 = options?.value(forKey: "asBase64") as? Bool ?? false;
         let videoCompression = options?.value(forKey: "videoCompression") as? String ?? "AVAssetExportPresetHighestQuality";
-        let asJpeg = options?.value(forKey: "asJpeg") as? Bool ?? false;
+        let asJpeg = options?.value(forKey: "asJpeg") as? Bool ?? true;
+        let width = options?.value(forKey: "width") as? Int ?? 1024;
+        let height = options?.value(forKey: "height") as? Int ?? 1024;
+        
         let recordingTimeLimit = options?.value(forKey: "recordingTimeLimit") as? Double ?? 60.0;
         let libraryTimeLimit = options?.value(forKey: "libraryTimeLimit") as? Double ?? 60.0;
         let minimumTimeLimit = options?.value(forKey: "minimumTimeLimit") as? Double ?? 3.0;
@@ -88,6 +91,7 @@ import YPImagePicker
         }
         config.library.minNumberOfItems = min;
         config.library.maxNumberOfItems = max;
+        
         config.wordings.warningMaxItemsLimit = maxCountMessage;
         if(buttonText != "") {
             config.wordings.next = buttonText;
@@ -105,7 +109,7 @@ import YPImagePicker
             if(cancelled) {
                 self.returnError(error: ErrorCodes.PickerCanceled)
             } else if(items.count > 0) {
-                self.handleResult(items: items, asBase64: asBase64, asJpeg: asJpeg);
+                self.handleResult(items: items, asBase64: asBase64, asJpeg: asJpeg, width: width, height: height);
             }
             picker.dismiss(animated: true, completion: nil);
         }
@@ -113,53 +117,100 @@ import YPImagePicker
         self.viewController.present(picker, animated: true, completion: nil);
     }
 
-    func handleResult(items: [YPMediaItem], asBase64: Bool, asJpeg: Bool) {
-        var array = [] as Array;
-        for item in items {
-            switch item {
-            case .photo(let photo):
-                let encodedImage = self.encodeImage(image: photo.image, asBase64: asBase64, asJpeg: asJpeg);
-                array.append([
-                    "type": "image",
-                    "isBase64": asBase64,
-                    "src": encodedImage
-                ]);
-                break;
-            case .video(let video):
-                var resultSrc:String;
-                if(asBase64) {
-                    resultSrc = self.encodeVideo(url: video.url);
-                    if(resultSrc == "") {
-                        self.returnError(error: ErrorCodes.UnknownError, message: "Failed to encode Video")
-                        return;
+    func handleResult(items: [YPMediaItem], asBase64: Bool, asJpeg: Bool, width: Int, height: Int) {
+        
+        let resultCBID = self._callbackId;
+        let dispatchQueue = DispatchQueue(label: "PhotoProcessing", qos: .default);
+        
+        dispatchQueue.async {
+            for item in items {
+                var array = [] as Array;
+
+                switch item {
+                case .photo(let photo):
+                    //
+                    let encodedImage = self.encodeImage(image: photo.image, asBase64: asBase64, asJpeg: asJpeg, width:width, height:height);
+                    array.append([
+                        "type": "image",
+                        "isBase64": asBase64,
+                        "src": encodedImage
+                    ]);
+                    break;
+                case .video(let video):
+                    var resultSrc:String;
+                    if(asBase64) {
+                        resultSrc = self.encodeVideo(url: video.url);
+                        if(resultSrc == "") {
+                            self.returnError(error: ErrorCodes.UnknownError, message: "Failed to encode Video")
+                            return;
+                        }
+                    } else {
+                        resultSrc = video.url.absoluteString;
                     }
-                } else {
-                    resultSrc = video.url.absoluteString;
+                    array.append([
+                        "type": "video",
+                        "isBase64": asBase64,
+                        "src": resultSrc
+                    ]);
+                    break;
                 }
-                array.append([
-                    "type": "video",
-                    "isBase64": asBase64,
-                    "src": resultSrc
-                ]);
-                break;
+
+                let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
+                result.setKeepCallbackAs(true);
+                self.commandDelegate.send(result, callbackId: resultCBID);
             }
+            
+            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: []);
+            result.setKeepCallbackAs(false);
+            self.commandDelegate.send(result, callbackId: resultCBID);
         }
-        let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
-        self.commandDelegate.send(result, callbackId: _callbackId)
+    }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 
-    func encodeImage(image: UIImage, asBase64: Bool, asJpeg: Bool) -> String {
+    func encodeImage(image: UIImage, asBase64: Bool, asJpeg: Bool, width: Int, height: Int) -> String {
         let imageData: NSData;
+        let _image = self.resizeImage(image: image, targetSize: CGSize(width: width, height: height))!;
+        
         if(asJpeg) {
-            imageData = image.jpegData(compressionQuality: 0.8)! as NSData;
+            imageData = UIImageJPEGRepresentation(
+                _image,
+                0.8
+            )! as NSData;
         } else {
-            imageData = image.pngData()! as NSData;
+            imageData = UIImagePNGRepresentation(_image)! as NSData;
         }
+        
         if(asBase64) {
             return imageData.base64EncodedString();
         } else {
             let filePath = self.tempFilePath();
             do {
+            
                 try imageData.write(to: filePath, options: .atomic);
                 return filePath.absoluteString;
             } catch {
