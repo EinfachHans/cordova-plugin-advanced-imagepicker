@@ -123,8 +123,8 @@ import YPImagePicker
         let dispatchQueue = DispatchQueue(label: "PhotoProcessing", qos: .default);
         
         dispatchQueue.async {
+            var array = [] as Array;
             for item in items {
-                var array = [] as Array;
 
                 switch item {
                 case .photo(let photo):
@@ -155,14 +155,11 @@ import YPImagePicker
                     break;
                 }
 
-                let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
-                result.setKeepCallbackAs(true);
-                self.commandDelegate.send(result, callbackId: resultCBID);
             }
             
-            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: []);
-            result.setKeepCallbackAs(false);
+            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
             self.commandDelegate.send(result, callbackId: resultCBID);
+            
         }
     }
     
@@ -208,7 +205,7 @@ import YPImagePicker
         if(asBase64) {
             return imageData.base64EncodedString();
         } else {
-            let filePath = self.tempFilePath();
+            let filePath = self.tempFilePath(ext: asJpeg ? "jpg": "png");
             do {
             
                 try imageData.write(to: filePath, options: .atomic);
