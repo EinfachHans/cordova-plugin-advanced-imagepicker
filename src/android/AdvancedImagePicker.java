@@ -12,19 +12,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 import gun0912.tedimagepicker.builder.TedImagePicker;
 
 public class AdvancedImagePicker extends CordovaPlugin {
 
     private CallbackContext _callbackContext;
+
+    private int galleryImageCount = 0;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -65,6 +73,8 @@ public class AdvancedImagePicker extends CordovaPlugin {
         boolean asDropdown = options.optBoolean("asDropdown");
         boolean asBase64 = options.optBoolean("asBase64");
         boolean asJpeg = options.optBoolean("asJpeg");
+        int width = options.optInt("width", 1024);
+        int height = options.optInt("height", 1024);
 
         if (min < 0 || max < 0) {
             this.returnError(AdvancedImagePickerErrorCodes.WrongJsonObject, "Min and Max can not be less then zero.");
@@ -105,7 +115,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
         if (max == 1) {
             String finalType = type;
             builder.start(result -> {
-                this.handleResult(result, asBase64, finalType, asJpeg);
+                this.handleResult(result, asBase64, finalType, asJpeg, width, height);
             });
         } else {
             if (min > 0) {
@@ -117,37 +127,52 @@ public class AdvancedImagePicker extends CordovaPlugin {
 
             String finalType1 = type;
             builder.startMultiImage(result -> {
-                this.handleResult(result, asBase64, finalType1, asJpeg);
+                this.handleResult(result, asBase64, finalType1, asJpeg, width, height);
             });
         }
     }
 
-    private void handleResult(Uri uri, boolean asBase64, String type, boolean asJpeg) {
+    private void handleResult(Uri uri, boolean asBase64, String type, boolean asJpeg, int width, int height) {
         List<Uri> list = new ArrayList<>();
         list.add(uri);
-        this.handleResult(list, asBase64, type, asJpeg);
+        this.handleResult(list, asBase64, type, asJpeg, width, height);
     }
 
-    private void handleResult(List<? extends Uri> uris, boolean asBase64, String type, boolean asJpeg) {
-        JSONArray result = new JSONArray();
-        for (Uri uri : uris) {
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("type", type);
-            resultMap.put("isBase64", asBase64);
-            if (asBase64) {
-                try {
-                    resultMap.put("src", type.equals("video") ? this.encodeVideo(uri) : this.encodeImage(uri, asJpeg));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    this.returnError(AdvancedImagePickerErrorCodes.UnknownError, e.getMessage());
-                    return;
+    private void handleResult(List<? extends Uri> uris, boolean asBase64, String type, boolean asJpeg, int width, int height) {
+
+        CallbackContext cb = this._callbackContext;
+
+        Executors.newSingleThreadExecutor().execute(
+                () -> {
+                    JSONArray result = new JSONArray();
+                    for (Uri uri : uris) {
+                        Map<String, Object> resultMap = new HashMap<>();
+                        resultMap.put("type", type);
+                        resultMap.put("isBase64", asBase64);
+                        if (asBase64) {
+                            try {
+                                resultMap.put("src", type.equals("video") ? this.encodeVideo(uri) : this.encodeImage(uri, asJpeg, width, height));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                this.returnError(AdvancedImagePickerErrorCodes.UnknownError, e.getMessage());
+                                return;
+                            }
+                        } else {
+                            //Path tempFile = Files.createTempFile(null, null);
+                            try {
+                                resultMap.put("src", encodeImageTempFile(uri, asJpeg, width, height));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                cb.error(e.getMessage());
+                                return;
+                            }
+                        }
+                        result.put(new JSONObject(resultMap));
+                    }
+                    cb.success(result);
                 }
-            } else {
-                resultMap.put("src", uri.toString());
-            }
-            result.put(new JSONObject(resultMap));
-        }
-        this._callbackContext.success(result);
+        );
+
     }
 
     private String encodeVideo(Uri uri) throws IOException {
@@ -163,14 +188,96 @@ public class AdvancedImagePicker extends CordovaPlugin {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-    private String encodeImage(Uri uri, boolean asJpeg) throws FileNotFoundException {
+    private String encodeImage(Uri uri, boolean asJpeg, int width, int height) throws FileNotFoundException {
         final InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
         final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-        return encodeImage(selectedImage, asJpeg);
+        return encodeImage(selectedImage, asJpeg, width, height);
     }
 
-    private String encodeImage(Bitmap bm, boolean asJpeg) {
+    private String encodeImageTempFile(Uri uri, boolean asJpeg, int width, int height) throws FileNotFoundException, IOException {
+        final InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
+        Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+        int finalWidth = width;
+        int finalHeight = height;
+        float widthRatio = (float)width / (float)selectedImage.getWidth();
+        float heightRatio = (float)height / (float)selectedImage.getHeight();
+
+        if(widthRatio > heightRatio) {
+            finalWidth = (int)(selectedImage.getWidth() * heightRatio);
+            finalHeight = (int)(selectedImage.getHeight() * heightRatio);
+        } else {
+            finalWidth = (int)(selectedImage.getWidth() * widthRatio);
+            finalHeight = (int)(selectedImage.getHeight() * widthRatio);
+        }
+
+
+        selectedImage = Bitmap.createScaledBitmap(
+            selectedImage,
+            finalWidth,
+            finalHeight,
+            true
+        );
+        galleryImageCount++;
+        File file = new File(
+                this.cordova.getContext().getCacheDir(),
+                String.format(
+                        "gallery-%d.%s",
+                        galleryImageCount,
+                        asJpeg ? "jpg" : "png"
+                )
+            );
+        if(file.exists()) file.delete();
+
+        FileOutputStream outStream = new FileOutputStream(file);
+        if (asJpeg) {
+            selectedImage.compress(Bitmap.CompressFormat.JPEG, 80, outStream);
+        } else {
+            selectedImage.compress(Bitmap.CompressFormat.PNG, 80, outStream);
+        }
+
+        outStream.flush();
+        outStream.close();
+
+        return Uri.fromFile(file).toString();
+    }
+
+    private String encodeImage(Bitmap bm, boolean asJpeg, int width, int height) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        /*
+let size = image.size
+
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }         */
+
+        int finalWidth = width;
+        int finalHeight = height;
+        float widthRatio = (float)width / (float)bm.getWidth();
+        float heightRatio = (float)height / (float)bm.getHeight();
+
+        if(widthRatio > heightRatio) {
+            finalWidth = (int)(bm.getWidth() * heightRatio);
+            finalHeight = (int)(bm.getHeight() * heightRatio);
+        } else {
+            finalWidth = (int)(bm.getWidth() * widthRatio);
+            finalHeight = (int)(bm.getHeight() * widthRatio);
+        }
+
+
+        bm = Bitmap.createScaledBitmap(
+                bm,
+                finalWidth,
+                finalHeight,
+                true
+        );
         if (asJpeg) {
             bm.compress(Bitmap.CompressFormat.JPEG, 80, baos);
         } else {
