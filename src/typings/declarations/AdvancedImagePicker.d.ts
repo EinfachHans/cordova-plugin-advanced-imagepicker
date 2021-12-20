@@ -23,7 +23,7 @@ declare module 'cordova-plugin-advanced-imagepicker' {
      * @param success Success Callback
      * @param error Error Callback
      */
-    static present(options: PresentOptions, success: (result: Result[]) => void, error: (error: AdvancedImagepickerError) => void): void;
+    static present(options: PresentOptions, success: (result: string|Result[]) => void, error: (error: AdvancedImagepickerError) => void): void;
 
     /**
      * Cleans all temp stored Files that was created by this Plugin (iOS only)
