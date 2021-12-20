@@ -1,3 +1,14 @@
+### [1.5.6](https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker/compare/V1.5.5...V1.5.6) (2021-10-18)
+
+#### Changes
+
+- Plugin sends a 'processing' string before the actual results, this is to provide feed back that there is work being done in the background.
+### [1.5.5](https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker/compare/V1.5.4...V1.5.5) (2021-10-18)
+
+#### Changes
+
+- Photos selected from gallery are processed in a background thread.
+- Photos will now resize.
 ### [1.5.4](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.3...V1.5.4) (2021-10-18)
 
 
