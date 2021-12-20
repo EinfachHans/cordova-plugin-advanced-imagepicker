@@ -141,7 +141,7 @@ Open the ImagePicker
     - buttonText (string)
     - asDropdown (boolean) **default: false**
     - asBase64 (boolean) **default: false**
-    - asJpeg (boolean) **default: false**
+    - asJpeg (boolean) **default: true**
     - videoCompression (string) ([Available Options](https://github.com/Yummypets/YPImagePicker/blob/23158e138bd649b40762bf2e4aa4beb0d463a121/Source/Configuration/YPImagePickerConfiguration.swift#L226-L240)) **default: AVAssetExportPresetHighestQuality**
     - recordingTimeLimit (number) **default: 60.0** **IOS only**
     - libraryTimeLimit (number) **default: 60.0** **IOS only**
@@ -158,7 +158,7 @@ window.AdvancedImagePicker.present({
 ```
 #### SuccessType:
 
-This Methode returns an Array of Objects with the following fields:
+This method returns the string 'processing' during the backgroud process phase, and then an array of objects on success with the following fields:
 
 - isBase64 (boolean) - is file base64 encoded
 - type (`'image'` | `'video'`) - type of selected file
