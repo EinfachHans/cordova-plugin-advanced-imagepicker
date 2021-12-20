@@ -7,6 +7,7 @@ import android.util.Base64;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -145,6 +146,13 @@ public class AdvancedImagePicker extends CordovaPlugin {
         Executors.newSingleThreadExecutor().execute(
                 () -> {
                     JSONArray result = new JSONArray();
+                    PluginResult processingResult = new PluginResult(
+                        PluginResult.Status.OK,
+                        "processing"
+                    );
+                    processingResult.setKeepCallback(true);
+                    cb.sendPluginResult(processingResult);
+
                     for (Uri uri : uris) {
                         Map<String, Object> resultMap = new HashMap<>();
                         resultMap.put("type", type);

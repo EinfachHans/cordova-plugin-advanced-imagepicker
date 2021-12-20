@@ -123,6 +123,11 @@ import YPImagePicker
         let dispatchQueue = DispatchQueue(label: "PhotoProcessing", qos: .default);
         
         dispatchQueue.async {
+            
+            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "processing");
+            result.setKeepCallbackAs(true);
+            self.commandDelegate.send(result, callbackId: resultCBID);
+            
             var array = [] as Array;
             for item in items {
 
@@ -157,7 +162,7 @@ import YPImagePicker
 
             }
             
-            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
+            result = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: array);
             self.commandDelegate.send(result, callbackId: resultCBID);
             
         }
