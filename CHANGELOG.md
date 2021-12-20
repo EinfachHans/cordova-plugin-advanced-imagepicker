@@ -9,6 +9,8 @@
 
 - Photos selected from gallery are processed in a background thread.
 - Photos will now resize.
+- Android; ted:tedimagepicker has been updated to 1.2.7
+- iOS; YPImagePicker has been updated to 5.0.0
 ### [1.5.4](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.3...V1.5.4) (2021-10-18)
 
 
