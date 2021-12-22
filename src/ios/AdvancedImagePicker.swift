@@ -124,7 +124,7 @@ import YPImagePicker
         
         dispatchQueue.async {
             
-            let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "processing");
+            var result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "processing");
             result.setKeepCallbackAs(true);
             self.commandDelegate.send(result, callbackId: resultCBID);
             
