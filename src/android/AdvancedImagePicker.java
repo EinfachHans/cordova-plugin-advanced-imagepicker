@@ -2,6 +2,8 @@ package de.einfachhans.AdvancedImagePicker;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import androidx.exifinterface.media.ExifInterface;
 import android.net.Uri;
 import android.util.Base64;
 
@@ -202,9 +204,30 @@ public class AdvancedImagePicker extends CordovaPlugin {
         return encodeImage(selectedImage, asJpeg, width, height);
     }
 
+    private static int exifToDegrees(int exifOrientation) {
+        switch(exifOrientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return 90;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return 180;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return 270;
+            default:
+                return 0;
+        }
+    }
+
     private String encodeImageTempFile(Uri uri, boolean asJpeg, int width, int height) throws FileNotFoundException, IOException {
-        final InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
+        InputStream imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
+        ExifInterface exif = new ExifInterface(imageStream);
+
+        int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        int rotationInDegrees = exifToDegrees(rotation);
+
+
+        imageStream = this.cordova.getContext().getContentResolver().openInputStream(uri);
         Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
         int finalWidth = width;
         int finalHeight = height;
         float widthRatio = (float)width / (float)selectedImage.getWidth();
@@ -218,13 +241,42 @@ public class AdvancedImagePicker extends CordovaPlugin {
             finalHeight = (int)(selectedImage.getHeight() * widthRatio);
         }
 
-
         selectedImage = Bitmap.createScaledBitmap(
-            selectedImage,
-            finalWidth,
-            finalHeight,
-            true
+                selectedImage,
+                finalWidth,
+                finalHeight,
+                true
         );
+
+        if (rotation != 0) {
+            Matrix matrix = new Matrix();
+            switch(rotation) {
+                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                    matrix.postScale(-1.f, 1.f);
+                    break;
+                case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                    matrix.postScale(1.f, -1.f);
+                    break;
+                case ExifInterface.ORIENTATION_TRANSVERSE:
+                    matrix.postRotate(90);
+                    matrix.postScale(1.f, -1.f);
+                    break;
+                case ExifInterface.ORIENTATION_TRANSPOSE:
+                    matrix.postRotate(-90);
+                    matrix.postScale(1.f, -1.f);
+                    break;
+                default:
+                    matrix.postRotate(rotationInDegrees);
+            }
+            selectedImage = Bitmap.createBitmap(
+                    selectedImage,
+                    0,0,
+                    selectedImage.getWidth(),
+                    selectedImage.getHeight(),
+                    matrix,
+                    true
+            );
+        }
         galleryImageCount++;
         File file = new File(
                 this.cordova.getContext().getCacheDir(),
