@@ -1,3 +1,8 @@
+### [1.5.7](https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker/compare/V1.5.6...V1.5.7) (2021-10-18)
+
+### Changes
+
+- Drop YPImagePicker in favour of dmcSDK for iOS https://github.com/DmcSDK/cordova-plugin-mediaPicker
 ### [1.5.6](https://github.com/dimitriadamou/cordova-plugin-advanced-imagepicker/compare/V1.5.5...V1.5.6) (2021-10-18)
 
 #### Changes

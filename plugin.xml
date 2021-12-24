@@ -29,35 +29,39 @@
 
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
-            <feature name="AdvancedImagePicker">
-                <param name="ios-package" value="AdvancedImagePicker"/>
-            </feature>
+          <feature name="AdvancedImagePicker">
+            <param name="ios-package" value="AdvancedImagePicker"/>
+          </feature>
         </config-file>
+        <source-file src="src/ios/MediaPicker.m"/>
+        <header-file src="src/ios/DMCMediaPicker/CollectionViewCell.h" />
+        <source-file src="src/ios/DMCMediaPicker/CollectionViewCell.m"/>
+        <header-file src="src/ios/DMCMediaPicker/DmcPickerViewController.h" />
+        <source-file src="src/ios/DMCMediaPicker/DmcPickerViewController.m"/>
+        <header-file src="src/ios/DMCMediaPicker/PreviewCell.h" />
+        <source-file src="src/ios/DMCMediaPicker/PreviewCell.m"/>
+        <header-file src="src/ios/DMCMediaPicker/PreviewViewController.h" />
+        <source-file src="src/ios/DMCMediaPicker/PreviewViewController.m"/>
+        <header-file src="src/ios/DMCMediaPicker/AlbumListView.h" />
+        <source-file src="src/ios/DMCMediaPicker/AlbumListView.m"/>
 
-        <header-file src="src/ios/AdvancedImagePicker-Bridging-Header.h" />
-        <source-file src="src/ios/AdvancedImagePicker.swift"  />
+        <header-file src="src/ios/DMCMediaPicker/FLAnimatedImage/FLAnimatedImage.h" />
+        <source-file src="src/ios/DMCMediaPicker/FLAnimatedImage/FLAnimatedImage.m"/>
+        <header-file src="src/ios/DMCMediaPicker/FLAnimatedImage/FLAnimatedImageView.h" />
+        <source-file src="src/ios/DMCMediaPicker/FLAnimatedImage/FLAnimatedImageView.m"/>
 
-        <podspec>
-            <config>
-                <source url="https://cdn.cocoapods.org/"/>
-            </config>
-            <pods use-frameworks="true">
-                <pod name="YPImagePicker" spec="4.5.0"/>
-            </pods>
-        </podspec>
-
-        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
-            <string>This app requires access to the camera to take pictures and videos.</string>
-        </config-file>
+        <resource-file src="src/ios/DMCMediaPicker/dmcPicker.bundle"/>
+        <resource-file src="src/ios/DMCMediaPicker/en.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/zh-Hans.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/es.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/pt-BR.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/pt-PT.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/tr.lproj"/>
+        <resource-file src="src/ios/DMCMediaPicker/de.lproj"/>
 
         <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
             <string>This app requires access to the photo library to select pictures and videos.</string>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
-            <string>This app requires access to the microphone to record videos.</string>
-        </config-file>
-
-        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 </plugin>

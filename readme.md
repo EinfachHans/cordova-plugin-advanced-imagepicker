@@ -4,7 +4,7 @@
 
 This [Cordova](https://cordova.apache.org) Plugin is for a better (multiple) ImagePicker with more options.
 
-It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `5.0.0`) on iOS and 
+It currently uses [DmcSDK/cordova-plugin-mediaPicker](https://github.com/DmcSDK/cordova-plugin-mediaPicker) (Version `2.4.3`) on iOS and 
 [ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.2.7`) on Android. 
 
 **This Plugin is in active development!**
@@ -142,7 +142,6 @@ Open the ImagePicker
     - asDropdown (boolean) **default: false**
     - asBase64 (boolean) **default: false**
     - asJpeg (boolean) **default: true**
-    - videoCompression (string) ([Available Options](https://github.com/Yummypets/YPImagePicker/blob/23158e138bd649b40762bf2e4aa4beb0d463a121/Source/Configuration/YPImagePickerConfiguration.swift#L226-L240)) **default: AVAssetExportPresetHighestQuality**
     - recordingTimeLimit (number) **default: 60.0** **IOS only**
     - libraryTimeLimit (number) **default: 60.0** **IOS only**
     - minimumTimeLimit (number) **default: 3.0** **IOS only**

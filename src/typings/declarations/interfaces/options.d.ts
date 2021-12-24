@@ -75,11 +75,6 @@ declare module 'cordova-plugin-advanced-imagepicker' {
      * default: false
      */
     asJpeg?: boolean;
-    /**
-     * Video Compression Option (iOS only)
-     * available options: https://github.com/Yummypets/YPImagePicker/blob/23158e138bd649b40762bf2e4aa4beb0d463a121/Source/Configuration/YPImagePickerConfiguration.swift#L226-L240
-     * default: AVAssetExportPresetHighestQuality
-     */
     videoCompression?: string;
   }
 
