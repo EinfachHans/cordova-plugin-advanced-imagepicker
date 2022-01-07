@@ -160,7 +160,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
             output.write(buffer, 0, bytesRead);
         }
         bytes = output.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+        return Base64.encodeToString(bytes, Base64.NO_WRAP);
     }
 
     private String encodeImage(Uri uri, boolean asJpeg) throws FileNotFoundException {
@@ -177,7 +177,7 @@ public class AdvancedImagePicker extends CordovaPlugin {
             bm.compress(Bitmap.CompressFormat.PNG, 80, baos);
         }
         byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
+        return Base64.encodeToString(b, Base64.NO_WRAP);
     }
 
     private void returnError(AdvancedImagePickerErrorCodes errorCode) {
