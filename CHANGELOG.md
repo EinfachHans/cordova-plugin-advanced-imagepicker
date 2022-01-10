@@ -1,3 +1,10 @@
+### [1.5.5](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.4...V1.5.5) (2022-01-07)
+
+
+### Bug Fixes
+
+* **android:** don't wrap base64 output ([#33](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/33)) ([b03620b](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/b03620b429551c68c939ef484e692a665f3b29ca))
+
 ### [1.5.4](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.3...V1.5.4) (2021-10-18)
 
 
