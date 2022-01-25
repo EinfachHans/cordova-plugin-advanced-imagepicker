@@ -21,7 +21,6 @@ Please consider donating if you're using this plugin in an app that makes you mo
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Content**
 
-- [Advanced ImagePicker Cordova Plugin](#advanced-imagepicker-cordova-plugin)
 - [Install](#install)
   - [Requirements](#requirements)
   - [Android](#android)
@@ -35,8 +34,6 @@ Please consider donating if you're using this plugin in an app that makes you mo
 - [Api](#api)
   - [All platforms](#all-platforms)
     - [present](#present)
-      - [Parameters:](#parameters)
-      - [SuccessType:](#successtype)
   - [iOS](#ios-2)
     - [cleanup](#cleanup)
 - [Quirks](#quirks)
