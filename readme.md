@@ -5,7 +5,7 @@
 This [Cordova](https://cordova.apache.org) Plugin is for a better (multiple) ImagePicker with more options.
 
 It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `4.5.0`) on iOS and 
-[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.2.2`) on Android. 
+[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.2.8`) on Android. 
 
 **This Plugin is in active development!**
 
@@ -21,6 +21,7 @@ Please consider donating if you're using this plugin in an app that makes you mo
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Content**
 
+- [Advanced ImagePicker Cordova Plugin](#advanced-imagepicker-cordova-plugin)
 - [Install](#install)
   - [Requirements](#requirements)
   - [Android](#android)
@@ -34,6 +35,8 @@ Please consider donating if you're using this plugin in an app that makes you mo
 - [Api](#api)
   - [All platforms](#all-platforms)
     - [present](#present)
+      - [Parameters:](#parameters)
+      - [SuccessType:](#successtype)
   - [iOS](#ios-2)
     - [cleanup](#cleanup)
 - [Quirks](#quirks)
@@ -66,7 +69,7 @@ I developed it, testing with **cordova-ios@6.1.0**.
 
 ## Android
 
-- ANDROID_IMAGE_PICKER_VERSION - Version of `gun0912.ted:tedimagepicker` / default to `1.1.4` 
+- ANDROID_IMAGE_PICKER_VERSION - Version of `gun0912.ted:tedimagepicker` / default to `1.2.8` 
 
 ## iOS
 

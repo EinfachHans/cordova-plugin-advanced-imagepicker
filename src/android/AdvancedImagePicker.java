@@ -82,6 +82,9 @@ public class AdvancedImagePicker extends CordovaPlugin {
                 .zoomIndicator(zoomIndicator)
                 .errorListener(error -> {
                     this.returnError(AdvancedImagePickerErrorCodes.UnknownError, error.getMessage());
+                })
+                .cancelListener(() -> {
+                    this.returnCancel();
                 });
 
         if (!scrollIndicatorDateFormat.equals("")) {
@@ -191,6 +194,14 @@ public class AdvancedImagePicker extends CordovaPlugin {
             resultMap.put("message", message == null ? "" : message);
             _callbackContext.error(new JSONObject(resultMap));
             _callbackContext = null;
+        }
+    }
+
+    private void returnCancel() {
+        if (this._callbackContext != null) {
+            // Return empty array on cancel
+            JSONArray result = new JSONArray();
+            this._callbackContext.success(result);
         }
     }
 }
