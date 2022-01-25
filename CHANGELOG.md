@@ -1,3 +1,11 @@
+### [1.5.6](https://github.com/rokkreslincom/cordova-plugin-advanced-imagepicker/compare/V1.5.5...V1.5.6) (2022-01-25)
+
+
+### Features
+
+* **android:** support cancel event ([cd5c7d7](https://github.com/rokkreslincom/cordova-plugin-advanced-imagepicker/commit/cd5c7d7b8946adc5d49df6688e184bbc0bd2e521))
+
+
 ### [1.5.5](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.4...V1.5.5) (2022-01-07)
 
 
