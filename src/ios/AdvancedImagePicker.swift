@@ -151,9 +151,9 @@ import YPImagePicker
     func encodeImage(image: UIImage, asBase64: Bool, asJpeg: Bool) -> String {
         let imageData: NSData;
         if(asJpeg) {
-            imageData = image.jpegData(compressionQuality: 0.8)! as NSData;
+            imageData = UIImageJPEGRepresentation(image, 0.8)! as NSData;
         } else {
-            imageData = image.pngData()! as NSData;
+            imageData = UIImagePNGRepresentation(image)! as NSData;
         }
         if(asBase64) {
             return imageData.base64EncodedString();
