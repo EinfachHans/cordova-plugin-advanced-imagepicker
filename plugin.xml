@@ -46,18 +46,6 @@
             </pods>
         </podspec>
 
-        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
-            <string>This app requires access to the camera to take pictures and videos.</string>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
-            <string>This app requires access to the photo library to select pictures and videos.</string>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
-            <string>This app requires access to the microphone to record videos.</string>
-        </config-file>
-
         <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 </plugin>
