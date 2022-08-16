@@ -1,3 +1,20 @@
+## [1.6.0](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.5...V1.6.0) (2022-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ios:** you have to manually set `NSCameraUsageDescription`, `NSPhotoLibraryUsageDescription` and `NSMicrophoneUsageDescription` now
+
+### Features
+
+* **android:** Support PickerCanceled error ([#43](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/issues/43)) ([f57f470](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/f57f47061c92edfd94ec37cbcb9300c941e55690))
+* **ios:** update library version ([ca3a33e](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/ca3a33e88e43d249b6aea57aef24136850f80415))
+
+
+### Code Refactoring
+
+* **ios:** remove hardcoded plist permission strings ([12425c7](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/12425c74597e1b7d0a359c4c01d8942ba0f898fa))
+
 ### [1.5.5](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.4...V1.5.5) (2022-01-07)
 
 
