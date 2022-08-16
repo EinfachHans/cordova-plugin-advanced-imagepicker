@@ -1,3 +1,10 @@
+### [1.6.2](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.6.1...V1.6.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* commit `plugin.xml` automatically ([ad0186a](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/ad0186afb6f9d62d98656b12c527910efe1c2790))
+
 ### [1.6.1](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.6.0...V1.6.1) (2022-08-16)
 
 
