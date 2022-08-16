@@ -82,6 +82,9 @@ public class AdvancedImagePicker extends CordovaPlugin {
                 .zoomIndicator(zoomIndicator)
                 .errorListener(error -> {
                     this.returnError(AdvancedImagePickerErrorCodes.UnknownError, error.getMessage());
+                })
+                .cancelListener(() -> {
+                    this.returnError(AdvancedImagePickerErrorCodes.PickerCanceled, "User cancelled");
                 });
 
         if (!scrollIndicatorDateFormat.equals("")) {
