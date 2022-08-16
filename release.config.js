@@ -60,6 +60,11 @@ module.exports = {
         prepareCmd: 'npm run doctoc'
       }
     ],
+    ['@semantic-release/exec',
+      {
+        prepareCmd: 'node ./scripts/set_plugin_version.js -v ${nextRelease.version}'
+      }
+    ],
     [
       '@semantic-release/changelog',
       {
