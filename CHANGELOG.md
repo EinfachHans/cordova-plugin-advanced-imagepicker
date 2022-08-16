@@ -1,3 +1,10 @@
+### [1.6.1](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.6.0...V1.6.1) (2022-08-16)
+
+
+### Code Refactoring
+
+* correctly set plugin version in `plugin.xml` ([397b515](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/commit/397b515280d4bf90a053e892ec41eaa3c292ee74))
+
 ## [1.6.0](https://github.com/EinfachHans/cordova-plugin-advanced-imagepicker/compare/V1.5.5...V1.6.0) (2022-08-16)
 
 

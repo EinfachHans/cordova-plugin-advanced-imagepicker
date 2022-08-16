@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-advanced-imagepicker",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Cordova Plugin for an advanced (multiple) ImagePicker",
   "devDependencies": {
     "@commitlint/config-conventional": "13.2.0",
