@@ -218,11 +218,11 @@ import YPImagePicker
         let result:CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK);
         self.commandDelegate.send(result, callbackId: command.callbackId);
     }
-}
 
-enum ErrorCodes:NSNumber {
-    case UnsupportedAction = 1
-    case WrongJsonObject = 2
-    case PickerCanceled = 3
-    case UnknownError = 10
+    enum ErrorCodes:NSNumber {
+        case UnsupportedAction = 1
+        case WrongJsonObject = 2
+        case PickerCanceled = 3
+        case UnknownError = 10
+    }
 }
