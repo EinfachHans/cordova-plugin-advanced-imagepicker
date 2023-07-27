@@ -23,7 +23,7 @@
         <source-file src="src/android/AdvancedImagePickerErrorCodes.java" target-dir="src/de/einfachhans/AdvancedImagePicker"/>
         <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
 
-        <preference name="ANDROID_IMAGE_PICKER_VERSION" default="1.2.8" />
+        <preference name="ANDROID_IMAGE_PICKER_VERSION" default="1.3.2" />
         <framework src="io.github.ParkSangGwon:tedimagepicker:$ANDROID_IMAGE_PICKER_VERSION"/>
     </platform>
 
