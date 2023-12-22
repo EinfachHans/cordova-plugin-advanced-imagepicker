@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,16 +100,16 @@ public class AdvancedImagePicker extends CordovaPlugin {
         if (asDropdown) {
             builder.dropDownAlbum();
         }
-        String type = "image";
         if (mediaType.equals("VIDEO")) {
             builder.video();
-            type = "video";
+        }
+		else if (mediaType.equals("IMAGE_AND_VIDEO")) {
+            builder.imageAndVideo();
         }
 
         if (max == 1) {
-            String finalType = type;
             builder.start(result -> {
-                this.handleResult(result, asBase64, finalType, asJpeg);
+                this.handleResult(result, asBase64, asJpeg);
             });
         } else {
             if (min > 0) {
@@ -117,30 +118,35 @@ public class AdvancedImagePicker extends CordovaPlugin {
             if (max > 0) {
                 builder.max(max, maxCountMessage);
             }
-
-            String finalType1 = type;
+            
             builder.startMultiImage(result -> {
-                this.handleResult(result, asBase64, finalType1, asJpeg);
+                this.handleResult(result, asBase64, asJpeg);
             });
         }
     }
 
-    private void handleResult(Uri uri, boolean asBase64, String type, boolean asJpeg) {
+    private void handleResult(Uri uri, boolean asBase64, boolean asJpeg) {
         List<Uri> list = new ArrayList<>();
         list.add(uri);
-        this.handleResult(list, asBase64, type, asJpeg);
+        this.handleResult(list, asBase64, asJpeg);
     }
 
-    private void handleResult(List<? extends Uri> uris, boolean asBase64, String type, boolean asJpeg) {
+    private void handleResult(List<? extends Uri> uris, boolean asBase64, boolean asJpeg) {
         JSONArray result = new JSONArray();
         for (Uri uri : uris) {
             Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("type", type);
             resultMap.put("isBase64", asBase64);
             if (asBase64) {
                 try {
+					String type = "image";
+					String mimeType = URLConnection.guessContentTypeFromName(String.valueOf(uri));
+					if (mimeType != null && mimeType.startsWith("video")) {
+						type = "video";
+					}
+					resultMap.put("type", type);            
                     resultMap.put("src", type.equals("video") ? this.encodeVideo(uri) : this.encodeImage(uri, asJpeg));
-                } catch (Exception e) {
+                } 
+				catch (Exception e) {
                     e.printStackTrace();
                     this.returnError(AdvancedImagePickerErrorCodes.UnknownError, e.getMessage());
                     return;
