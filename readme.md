@@ -4,8 +4,8 @@
 
 This [Cordova](https://cordova.apache.org) Plugin is for a better (multiple) ImagePicker with more options.
 
-It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `5.2.1`) on iOS and 
-[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.2.8`) on Android. 
+It currently uses [Yummypets/YPImagePicker](https://github.com/Yummypets/YPImagePicker) (Version `5.2.2`) on iOS and 
+[ParkSangGwon/TedImagePicker](https://github.com/ParkSangGwon/TedImagePicker) (Default-Version `1.4.2`) on Android. 
 
 **This Plugin is in active development!**
 
@@ -182,7 +182,7 @@ window.AdvancedImagePicker.cleanup(function() {
 
 ## Android
 
-- Currently, the Android Library is not able to select Images and Videos at the same Time. See reported Issue [here](https://github.com/ParkSangGwon/TedImagePicker/issues/40).
+- [FIXED?] Currently, the Android Library is not able to select Images and Videos at the same Time. See reported Issue [here](https://github.com/ParkSangGwon/TedImagePicker/issues/40).
 
 # Changelog
 
